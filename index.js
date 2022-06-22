@@ -5,7 +5,7 @@ const usersList = [
     {
         userName: '12345',
         password: '1234',
-        profileImage: './images/Profile1.jpg',
+        profileImage: './images/profile1.jpg',
         nameUser: 'Mali',
         age: 45,
         balance: 200
@@ -13,7 +13,7 @@ const usersList = [
     {
         userName: '67890',
         password: '4321',
-        profileImage: './images/profile2.jpg',
+        profileImage: './images/Profile2.jpg',
         nameUser: 'Gera',
         age: 35,
         balance: 290
