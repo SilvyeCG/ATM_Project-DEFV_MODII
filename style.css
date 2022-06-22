@@ -1,0 +1,17 @@
+.loginText{
+    font-family: 'Bebas Neue', cursive;
+    font-size: 60px;
+}
+
+#bntAccess{
+    background-color: red;
+    color: white;
+}
+#btnAccess:hover{
+    background-color: darkolivegreen;
+}
+
+#ATMText{
+    font-family: 'Bebas Neue', cursive;
+    font-size: 60px;
+}
