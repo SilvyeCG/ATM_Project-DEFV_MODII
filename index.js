@@ -31,6 +31,7 @@ const usersList = [
 let loginForm = document.querySelector('#formAccount');
 boxAccount = document.getElementById('box-account');
 boxButtons = document.getElementById('box-buttons');
+boxTransaction = document.getElementById('box-transaction');
 
 
 // LOGIN FUNCTIONS
@@ -60,7 +61,7 @@ function validateCredentials(pUser, pPass){
         
         if(userData.password == pPass){
             
-            sessionStorage.setItem('userInfo', JSON.stringify(userData));
+            localStorage.setItem('userInfo', JSON.stringify(userData));
             indicator = usersList.indexOf(userData);
             accountManage(indicator);
             
@@ -69,7 +70,7 @@ function validateCredentials(pUser, pPass){
             alert('Invalid credentials. Password is incorrect');
         }
     }else{
-        alert('Invalid credentials, User Name is incorrect')
+        alert('Invalid credentials, User Name is incorrect');
     }
     
     
@@ -119,6 +120,7 @@ function accountManage(indicator){
     <div class="col-3 pt-3 ps-4">
         <button type="submit" id="btnSignOut" class="bg-warning text-white p-3">Sign Out</button>
     </div>
+
     `
 
     boxAccount.appendChild(cardAccount);
@@ -169,7 +171,12 @@ function loadVariables(indicator){
 
 function getBalance(indicator){
     alert('Your current balance is: ' + usersList[indicator].balance);
-
+    const cardBalance = document.createElement('div');
+    cardBalance.classList.add('row', 'ps-4');
+    cardBalance.innerHTML = `
+        <p class="fw-bold bg-primary text-white">Check balance: $${usersList[indicator].balance}</p>
+    `
+    boxTransaction.appendChild(cardBalance);
 }
 
 function performWithdraw(indicator){
@@ -183,12 +190,26 @@ function performWithdraw(indicator){
     if(balanceWith >= 10){
         usersList[indicator].balance = balanceWith;
         alert('Your balance is: ' + usersList[indicator].balance);
+
+        const cardWh = document.createElement('div');
+        cardWh.classList.add('row', 'ps-4');
+        cardWh.innerHTML = `
+            <p class="fw-bold bg-danger text-white">Withdraw: $${withdrawal}</p>
+        `
+        boxTransaction.appendChild(cardWh);
+
     }else if(balanceWith > 0 && balanceWith < 10){
         alert('Sorry, your account cannot have less than $10');
     }else if(balanceWith <= 0){
         alert('Your account is overdraft');
     }
     }
+
+    //getBalance(indicator);
+
+    
+
+
 }
 
 function performDeposit(indicator){
@@ -202,8 +223,29 @@ function performDeposit(indicator){
     if(updateAmount <= 990){
         alert('Account balance: ' + updateAmount);
         usersList[indicator].balance = updateAmount;
+
+        const cardDeposit = document.createElement('div');
+        cardDeposit.classList.add('row', 'ps-4');
+        cardDeposit.innerHTML = `
+            <p class="fw-bold bg-success text-white">Deposit: $${deposit}</p>
+        `
+        boxTransaction.appendChild(cardDeposit);
+
     }else{
         alert('Sorry, your account cannot have more than $990');
     }
     }
+
+    
+}
+
+function clearTransactions(){
+    let btnAccept = document.querySelector('#btnAccept');
+
+    btnAccept.addEventListener('click', () => {
+        boxTransaction.innerHTML = '';
+        
+    });
+
+   
 }
