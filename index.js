@@ -62,7 +62,6 @@ function validateCredentials(pUser, pPass){
             
             sessionStorage.setItem('userInfo', JSON.stringify(userData));
             indicator = usersList.indexOf(userData);
-            // console.log(indicator);
             accountManage(indicator);
             
 
@@ -81,7 +80,6 @@ function accountManage(indicator){
     clearHTML();
     
     const dataUser = usersList[indicator];
-    //console.log(dataUser);
 
     const cardAccount = document.createElement('div');
     cardAccount.classList.add('col-6' ,'m-3');
@@ -126,8 +124,6 @@ function accountManage(indicator){
     boxAccount.appendChild(cardAccount);
     boxButtons.appendChild(cardButtons);
 
-    let obj = JSON.parse(sessionStorage.getItem('userInfo'));
-    //console.log(obj);
     loadVariables(indicator);
     
 }
@@ -144,27 +140,23 @@ function loadVariables(indicator){
 
     btnBalance.addEventListener('click', () => {
         indicatorGetB = indicator;
-        // console.log(indicatorGet)
         getBalance(indicatorGetB);
         
     });
 
     btnWithdraw.addEventListener('click', () => {
         indicatorGetW = indicator;
-        // console.log(indicatorGet)
         performWithdraw(indicatorGetW);
         
     });
 
     btnDeposit.addEventListener('click', () => {
         indicatorGetD = indicator;
-        // console.log(indicatorGet)
         performDeposit(indicatorGetD);
         
     });
 
     btnSignOut.addEventListener('click', () => {
-       // performSignOut();
        var message = confirm('Are you sure?')
        if(message){
         location.reload(true);
@@ -177,7 +169,7 @@ function loadVariables(indicator){
 
 function getBalance(indicator){
     alert('Your current balance is: ' + usersList[indicator].balance);
-    //console.log(indicator)
+
 }
 
 function performWithdraw(indicator){
@@ -200,7 +192,6 @@ function performWithdraw(indicator){
 }
 
 function performDeposit(indicator){
-    //console.log(indicator)
 
     let deposit = Number(prompt('How much money would you like to deposit into your account?'));
     if(deposit == null || isNaN(deposit) == true || deposit <= 0){
